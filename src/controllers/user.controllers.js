@@ -38,7 +38,7 @@ const login = async (req,res)=>{
 
     try{
 
-        let user = await User.findOne({email:req.body.email}).lean().exec();
+        let user = await User.findOne({email:req.body.email});
         console.log(user);
 
         if(!user){

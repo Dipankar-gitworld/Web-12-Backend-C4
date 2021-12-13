@@ -4,6 +4,7 @@ const router = express.Router();
 
 const Show = require("../models/show.model");
 
+
 router.post("", async (req,res)=>{
     try{
         const user = await Show.create(req.body);
@@ -15,5 +16,14 @@ router.post("", async (req,res)=>{
     
 
 });
+
+router.get("/:id", async (req,res)=>{
+    try{
+        const shows = await Show.find({movie_id:req.params.id}).lean().exec();
+        return res.send(shows);
+    }catch(e){
+        return res.status(500).json({status:"failed", message:e.message});
+    }
+})
 
 module.exports = router;
